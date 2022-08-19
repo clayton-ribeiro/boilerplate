@@ -1,9 +1,12 @@
 module.exports = {
+  staticDirs: ['../public'],
   stories: ['../src/components/**/stories.tsx'],
-  addons: [
-    '@storybook/preset-typescript',
-    '@storybook/addon-actions',
-    '@storybook/addon-links',
-    '@storybook/addon-knobs/register'
-  ]
+  addons: ['@storybook/addon-essentials', 'storybook-addon-next-router'],
+  core: {
+    builder: 'webpack5'
+  },
+  webpackFinal: (config) => {
+    config.resolve.modules.push(`${process.cwd()}/src`)
+    return config
+  }
 }
